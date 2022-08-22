@@ -4,22 +4,28 @@ let count = 0;
 // select value and buttons
 const value = document.querySelector("#value");
 const btns = document.querySelectorAll(".btn");
-console.log(value);
-console.log(btns);
 
 const btnsArr = Array.from(btns);
 
 btnsArr.map((btn) => {
   btn.addEventListener("click", function (e) {
     console.log(e.target.classList);
-    const classArr = Array.from(e.target.classList);
-    if (classArr.includes("decrease")) {
+    const styles = Array.from(e.target.classList);
+    if (styles.includes("decrease")) {
       count -= 1;
-    } else if (classArr.includes("increase")) {
+    } else if (styles.includes("increase")) {
       count += 1;
-    } else if (classArr.includes("reset")) {
+    } else if (styles.includes("reset")) {
       count = 0;
     }
+    if (count > 0) {
+      value.style.color = "green";
+    }
+    if (count < 0) {
+      value.style.color = "red";
+    }
+    if (count === 0) value.style.color = "#222";
+
     value.textContent = count;
   });
 });
